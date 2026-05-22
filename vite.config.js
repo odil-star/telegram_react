@@ -3,13 +3,14 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
+  const base = env.VITE_BASE_PATH || "/telegram_react/";
   const extraAllowedHosts = (env.VITE_ALLOWED_HOSTS || "")
     .split(",")
     .map((host) => host.trim())
     .filter(Boolean);
 
   return {
-    base: "/telegram_react/",
+    base,
     plugins: [react()],
 
     server: {
