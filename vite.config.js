@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
     .filter(Boolean);
 
   return {
-    base: mode === "production" ? "/telegram_react/" : "/",
+    base: "/telegram_react/",
     plugins: [react()],
 
     server: {
