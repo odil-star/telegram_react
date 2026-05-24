@@ -41,6 +41,16 @@ function authenticateTelegram() {
   return authRequest;
 }
 
+function applyTelegramTheme() {
+  const tg = window.Telegram?.WebApp || WebApp;
+  const version = Number.parseFloat(tg?.version || "0");
+
+  if (version >= 6.1) {
+    tg.setHeaderColor?.("#fff7ed");
+    tg.setBackgroundColor?.("#fff7ed");
+  }
+}
+
 export function useTelegramAuth() {
   const [user, setUser] = useState(() => getStoredUser());
   const [loading, setLoading] = useState(true);
@@ -67,8 +77,7 @@ export function useTelegramAuth() {
       try {
         WebApp.ready();
         WebApp.expand();
-        WebApp.setHeaderColor?.("#fff7ed");
-        WebApp.setBackgroundColor?.("#fff7ed");
+        applyTelegramTheme();
 
         const nextUser = await authenticateTelegram();
         if (alive) setUser(nextUser);
